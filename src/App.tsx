@@ -43,44 +43,6 @@ export const App = () => {
     setText(e.target.value);
   };
 
-  const handleEdit = (id: number, value: string) => {
-    setTodos((todos) => {
-      // todoが多くなった際の計算量が気になる
-      // DBに保存すれば解決しそう
-      const newTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, value };
-        }
-        return todo;
-      });
-      return newTodos;
-    });
-  };
-
-  const handleCheck = (id: number, checked: boolean) => {
-    setTodos((todos) => {
-      const newTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, checked };
-        }
-        return todo;
-      });
-      return newTodos;
-    });
-  };
-
-  const handleRemove = (id: number, removed: boolean) => {
-    setTodos((todos) => {
-      const newTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, removed };
-        }
-        return todo;
-      });
-      return newTodos;
-    });
-  };
-
   const handleSort = (filter: Filter) => {
     setFilter(filter);
   };
@@ -165,15 +127,17 @@ export const App = () => {
               type="checkbox"
               disabled={filter === "checked" || filter === "removed"}
               checked={todo.checked}
-              onChange={() => handleCheck(todo.id, !todo.checked)}
+              onChange={() => handleTodo(todo.id, "checked", !todo.checked)}
             />
             <input
               type="text"
               disabled={filter === "checked" || filter === "removed"}
               value={todo.value}
-              onChange={(e) => handleEdit(todo.id, e.target.value)}
+              onChange={(e) => handleTodo(todo.id, "value", e.target.value)}
             />
-            <button onClick={() => handleRemove(todo.id, !todo.removed)}>
+            <button
+              onClick={() => handleTodo(todo.id, "removed", !todo.removed)}
+            >
               {todo.removed ? "復元" : "削除"}
             </button>
           </li>
