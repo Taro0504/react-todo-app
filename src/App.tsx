@@ -2,8 +2,8 @@ import { ChangeEvent, useState } from "react";
 
 import { FormDialog } from "./components/FormDialog";
 import { ActionButton } from "./components/ActionButton";
-import { SideBar } from "./components/SideBar";
 import { TodoItem } from "./components/TodoItem";
+import { Header } from "./components/Header";
 
 /**
  * component
@@ -20,7 +20,7 @@ export const App = () => {
     const newTodo: Todo = {
       value: text,
       id: new Date().getTime(),
-      checked: false,
+      done: false,
       removed: false,
     };
 
@@ -59,7 +59,7 @@ export const App = () => {
 
   return (
     <div>
-      <SideBar onSort={handleSort} />
+      <Header filter={filter} onSort={handleSort} />
       <FormDialog text={text} onsubmit={handleSubmit} onChange={handleChange} />
       <TodoItem todos={todos} filter={filter} onTodo={handleTodo} />
       <ActionButton todos={todos} onEmpty={handleEmpty} />

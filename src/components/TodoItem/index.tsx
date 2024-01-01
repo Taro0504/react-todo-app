@@ -15,12 +15,12 @@ export const TodoItem = (props: Props) => {
       case "all":
         // 削除されていないもの
         return !todo.removed;
-      case "checked":
+      case "done":
         // 完了済み かつ 削除されていないもの
-        return todo.checked && !todo.removed;
-      case "unchecked":
+        return todo.done && !todo.removed;
+      case "undone":
         // 未完了 かつ 削除されていないもの
-        return !todo.checked && !todo.removed;
+        return !todo.done && !todo.removed;
       case "removed":
         // 削除されたもの
         return todo.removed;
@@ -35,13 +35,13 @@ export const TodoItem = (props: Props) => {
         <li key={todo.id}>
           <input
             type="checkbox"
-            disabled={props.filter === "checked" || props.filter === "removed"}
-            checked={todo.checked}
-            onChange={() => props.onTodo(todo.id, "checked", !todo.checked)}
+            disabled={props.filter === "done" || props.filter === "removed"}
+            checked={todo.done}
+            onChange={() => props.onTodo(todo.id, "done", !todo.done)}
           />
           <input
             type="text"
-            disabled={props.filter === "checked" || props.filter === "removed"}
+            disabled={props.filter === "done" || props.filter === "removed"}
             value={todo.value}
             onChange={(e) => props.onTodo(todo.id, "value", e.target.value)}
           />
