@@ -19,6 +19,7 @@ export const App = () => {
 
     const newTodo: Todo = {
       value: text,
+      // FIXME: 本来はuuidを使うべき(同じidが生成される可能性がある)
       id: new Date().getTime(),
       done: false,
       removed: false,
@@ -60,8 +61,8 @@ export const App = () => {
   return (
     <div>
       <Header filter={filter} onSort={handleSort} />
-      <FormDialog text={text} onsubmit={handleSubmit} onChange={handleChange} />
       <TodoItem todos={todos} filter={filter} onTodo={handleTodo} />
+      <FormDialog text={text} onsubmit={handleSubmit} onChange={handleChange} />
       <ActionButton todos={todos} onEmpty={handleEmpty} />
     </div>
   );
